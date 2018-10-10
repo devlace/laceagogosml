@@ -5,4 +5,7 @@ WORKDIR /
 # Copy the directory contents into the container at /
 COPY . /
 
+RUN pip install -r requirements.txt
+RUN python hellotest.py
+
 CMD ["python", "hello.py"]

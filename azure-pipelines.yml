@@ -9,6 +9,12 @@ pool:
 variables:
   imageName: 'devlace:$(build.buildId)'
 
-steps:
-- script: docker build -f Dockerfile -t $(imageName) .
-  displayName: 'docker build'
+jobs:
+- job: build
+  steps:
+  - script: 'pip install flake8 && flake8' 
+    displayName: Flake8
+    enabled: false
+    continueOnError: true
+  - script: docker build -f Dockerfile -t $(imageName) .
+    displayName: 'docker build'
